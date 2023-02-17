@@ -1,0 +1,788 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TecniMecanica_vPruebaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AUTOMOVIL">
+          <Key>
+            <PropertyRef Name="IDAUTO" />
+          </Key>
+          <Property Name="IDAUTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUSU" Type="int" Nullable="false" />
+          <Property Name="IDMODELO" Type="int" Nullable="false" />
+          <Property Name="COLORAUTO" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PLACAAUTO" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="KILOMAUTO" Type="int" Nullable="false" />
+          <Property Name="ANIO" Type="int" Nullable="false" />
+          <Property Name="TRANSMICION" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TIPOCOMBUSTIBLE" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="IDCATEGORIA" />
+          </Key>
+          <Property Name="IDCATEGORIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCATEGORIA" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTADOORDEN">
+          <Key>
+            <PropertyRef Name="IDESTADO" />
+          </Key>
+          <Property Name="IDESTADO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESESTADO" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="MARCA">
+          <Key>
+            <PropertyRef Name="IDMARCA" />
+          </Key>
+          <Property Name="IDMARCA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESMARCA" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MODELO">
+          <Key>
+            <PropertyRef Name="IDMODELO" />
+          </Key>
+          <Property Name="IDMODELO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDMARCA" Type="int" Nullable="false" />
+          <Property Name="DESMODELO" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ORDENTRABAJODET">
+          <Key>
+            <PropertyRef Name="IDORDENDET" />
+          </Key>
+          <Property Name="IDORDENDET" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDSERVICIO" Type="int" />
+          <Property Name="IDORDENCLI" Type="int" Nullable="false" />
+          <Property Name="IDREPUESTO" Type="int" />
+          <Property Name="TIEMPSERVHORAS" Type="float" />
+          <Property Name="CANTORDENDET" Type="int" Nullable="false" />
+          <Property Name="PRECIOORDENDET" Type="float" Nullable="false" />
+          <Property Name="DESCRIPCIONDET" Type="varchar" MaxLength="400" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ORDENTRABAJOENCAB">
+          <Key>
+            <PropertyRef Name="IDORDENCLI" />
+          </Key>
+          <Property Name="IDORDENCLI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDAUTO" Type="int" Nullable="false" />
+          <Property Name="IDESTADO" Type="int" Nullable="false" />
+          <Property Name="IDUSU" Type="int" Nullable="false" />
+          <Property Name="FECHAORDEN" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="COMENTARIOCLI" Type="varchar" MaxLength="500" />
+          <Property Name="INVENTARIOVEHIC" Type="varchar" MaxLength="500" />
+          <Property Name="DANIOSAUTOCLI" Type="varchar" MaxLength="500" />
+          <Property Name="KILOMAUTOCLI" Type="int" Nullable="false" />
+          <Property Name="FALLASAUTOCLI" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="TRABFINALIZADO" Type="bit" />
+        </EntityType>
+        <EntityType Name="REPUESTO">
+          <Key>
+            <PropertyRef Name="IDREPUESTO" />
+          </Key>
+          <Property Name="IDREPUESTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESREPUESTO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="COSTREPUESTO" Type="float" Nullable="false" />
+          <Property Name="STOCKREPUESTO" Type="int" Nullable="false" />
+          <Property Name="IDCATEGORIA" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="IDROL" />
+          </Key>
+          <Property Name="IDROL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESROL" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SERVICIO">
+          <Key>
+            <PropertyRef Name="IDSERVICIO" />
+          </Key>
+          <Property Name="IDSERVICIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESSERVICIO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="COSTSERVICIO" Type="float" Nullable="false" />
+          <Property Name="TIPOSERVICIO" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="IDUSU" />
+          </Key>
+          <Property Name="IDUSU" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDROL" Type="int" Nullable="false" />
+          <Property Name="NOMBREUSU" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="EMAILUSU" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CELUSU" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DIRECCIONUSU" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="SESIONUSU" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="CLAVEUSU" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="CEDULUSU" Type="varchar" MaxLength="12" />
+        </EntityType>
+        <Association Name="FK_AUTOMOVI_CARACTERI_MODELO">
+          <End Role="MODELO" Type="Self.MODELO" Multiplicity="1" />
+          <End Role="AUTOMOVIL" Type="Self.AUTOMOVIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODELO">
+              <PropertyRef Name="IDMODELO" />
+            </Principal>
+            <Dependent Role="AUTOMOVIL">
+              <PropertyRef Name="IDMODELO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AUTOMOVI_PROPIETAR_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="AUTOMOVIL" Type="Self.AUTOMOVIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSU" />
+            </Principal>
+            <Dependent Role="AUTOMOVIL">
+              <PropertyRef Name="IDUSU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODELO_AUTO_MARCA">
+          <End Role="MARCA" Type="Self.MARCA" Multiplicity="1" />
+          <End Role="MODELO" Type="Self.MODELO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MARCA">
+              <PropertyRef Name="IDMARCA" />
+            </Principal>
+            <Dependent Role="MODELO">
+              <PropertyRef Name="IDMARCA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDENTRA_ASIGAUTO_AUTOMOVI">
+          <End Role="AUTOMOVIL" Type="Self.AUTOMOVIL" Multiplicity="1" />
+          <End Role="ORDENTRABAJOENCAB" Type="Self.ORDENTRABAJOENCAB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTOMOVIL">
+              <PropertyRef Name="IDAUTO" />
+            </Principal>
+            <Dependent Role="ORDENTRABAJOENCAB">
+              <PropertyRef Name="IDAUTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDENTRA_ASIGDETAL_ORDENTRA">
+          <End Role="ORDENTRABAJOENCAB" Type="Self.ORDENTRABAJOENCAB" Multiplicity="1" />
+          <End Role="ORDENTRABAJODET" Type="Self.ORDENTRABAJODET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDENTRABAJOENCAB">
+              <PropertyRef Name="IDORDENCLI" />
+            </Principal>
+            <Dependent Role="ORDENTRABAJODET">
+              <PropertyRef Name="IDORDENCLI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDENTRA_ASIGESTAD_ESTADOOR">
+          <End Role="ESTADOORDEN" Type="Self.ESTADOORDEN" Multiplicity="1" />
+          <End Role="ORDENTRABAJOENCAB" Type="Self.ORDENTRABAJOENCAB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOORDEN">
+              <PropertyRef Name="IDESTADO" />
+            </Principal>
+            <Dependent Role="ORDENTRABAJOENCAB">
+              <PropertyRef Name="IDESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDENTRA_ASIGREP_REPUESTO">
+          <End Role="REPUESTO" Type="Self.REPUESTO" Multiplicity="0..1" />
+          <End Role="ORDENTRABAJODET" Type="Self.ORDENTRABAJODET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REPUESTO">
+              <PropertyRef Name="IDREPUESTO" />
+            </Principal>
+            <Dependent Role="ORDENTRABAJODET">
+              <PropertyRef Name="IDREPUESTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDENTRA_ASIGSERVI_SERVICIO">
+          <End Role="SERVICIO" Type="Self.SERVICIO" Multiplicity="0..1" />
+          <End Role="ORDENTRABAJODET" Type="Self.ORDENTRABAJODET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIO">
+              <PropertyRef Name="IDSERVICIO" />
+            </Principal>
+            <Dependent Role="ORDENTRABAJODET">
+              <PropertyRef Name="IDSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDENTRA_ASIGTECNI_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="ORDENTRABAJOENCAB" Type="Self.ORDENTRABAJOENCAB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSU" />
+            </Principal>
+            <Dependent Role="ORDENTRABAJOENCAB">
+              <PropertyRef Name="IDUSU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REPUESTO_TIPO_REPU_CATEGORI">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
+          <End Role="REPUESTO" Type="Self.REPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="IDCATEGORIA" />
+            </Principal>
+            <Dependent Role="REPUESTO">
+              <PropertyRef Name="IDCATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_TIPO_ROL">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="IDROL" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="IDROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TecniMecanica_vPruebaModelStoreContainer">
+          <EntitySet Name="AUTOMOVIL" EntityType="Self.AUTOMOVIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESTADOORDEN" EntityType="Self.ESTADOORDEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MARCA" EntityType="Self.MARCA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MODELO" EntityType="Self.MODELO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDENTRABAJODET" EntityType="Self.ORDENTRABAJODET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDENTRABAJOENCAB" EntityType="Self.ORDENTRABAJOENCAB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REPUESTO" EntityType="Self.REPUESTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SERVICIO" EntityType="Self.SERVICIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AUTOMOVI_CARACTERI_MODELO" Association="Self.FK_AUTOMOVI_CARACTERI_MODELO">
+            <End Role="MODELO" EntitySet="MODELO" />
+            <End Role="AUTOMOVIL" EntitySet="AUTOMOVIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AUTOMOVI_PROPIETAR_USUARIO" Association="Self.FK_AUTOMOVI_PROPIETAR_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="AUTOMOVIL" EntitySet="AUTOMOVIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODELO_AUTO_MARCA" Association="Self.FK_MODELO_AUTO_MARCA">
+            <End Role="MARCA" EntitySet="MARCA" />
+            <End Role="MODELO" EntitySet="MODELO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDENTRA_ASIGAUTO_AUTOMOVI" Association="Self.FK_ORDENTRA_ASIGAUTO_AUTOMOVI">
+            <End Role="AUTOMOVIL" EntitySet="AUTOMOVIL" />
+            <End Role="ORDENTRABAJOENCAB" EntitySet="ORDENTRABAJOENCAB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDENTRA_ASIGDETAL_ORDENTRA" Association="Self.FK_ORDENTRA_ASIGDETAL_ORDENTRA">
+            <End Role="ORDENTRABAJOENCAB" EntitySet="ORDENTRABAJOENCAB" />
+            <End Role="ORDENTRABAJODET" EntitySet="ORDENTRABAJODET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDENTRA_ASIGESTAD_ESTADOOR" Association="Self.FK_ORDENTRA_ASIGESTAD_ESTADOOR">
+            <End Role="ESTADOORDEN" EntitySet="ESTADOORDEN" />
+            <End Role="ORDENTRABAJOENCAB" EntitySet="ORDENTRABAJOENCAB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDENTRA_ASIGREP_REPUESTO" Association="Self.FK_ORDENTRA_ASIGREP_REPUESTO">
+            <End Role="REPUESTO" EntitySet="REPUESTO" />
+            <End Role="ORDENTRABAJODET" EntitySet="ORDENTRABAJODET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDENTRA_ASIGSERVI_SERVICIO" Association="Self.FK_ORDENTRA_ASIGSERVI_SERVICIO">
+            <End Role="SERVICIO" EntitySet="SERVICIO" />
+            <End Role="ORDENTRABAJODET" EntitySet="ORDENTRABAJODET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDENTRA_ASIGTECNI_USUARIO" Association="Self.FK_ORDENTRA_ASIGTECNI_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="ORDENTRABAJOENCAB" EntitySet="ORDENTRABAJOENCAB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REPUESTO_TIPO_REPU_CATEGORI" Association="Self.FK_REPUESTO_TIPO_REPU_CATEGORI">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="REPUESTO" EntitySet="REPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_TIPO_ROL" Association="Self.FK_USUARIO_TIPO_ROL">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TecniMecanica_vPruebaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AUTOMOVIL">
+          <Key>
+            <PropertyRef Name="IDAUTO" />
+          </Key>
+          <Property Name="IDAUTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUSU" Type="Int32" Nullable="false" />
+          <Property Name="IDMODELO" Type="Int32" Nullable="false" />
+          <Property Name="COLORAUTO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PLACAAUTO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="KILOMAUTO" Type="Int32" Nullable="false" />
+          <Property Name="ANIO" Type="Int32" Nullable="false" />
+          <Property Name="TRANSMICION" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TIPOCOMBUSTIBLE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MODELO" Relationship="Self.FK_AUTOMOVI_CARACTERI_MODELO" FromRole="AUTOMOVIL" ToRole="MODELO" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_AUTOMOVI_PROPIETAR_USUARIO" FromRole="AUTOMOVIL" ToRole="USUARIO" />
+          <NavigationProperty Name="ORDENTRABAJOENCAB" Relationship="Self.FK_ORDENTRA_ASIGAUTO_AUTOMOVI" FromRole="AUTOMOVIL" ToRole="ORDENTRABAJOENCAB" />
+        </EntityType>
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="IDCATEGORIA" />
+          </Key>
+          <Property Name="IDCATEGORIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCATEGORIA" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="REPUESTO" Relationship="Self.FK_REPUESTO_TIPO_REPU_CATEGORI" FromRole="CATEGORIA" ToRole="REPUESTO" />
+        </EntityType>
+        <EntityType Name="ESTADOORDEN">
+          <Key>
+            <PropertyRef Name="IDESTADO" />
+          </Key>
+          <Property Name="IDESTADO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESESTADO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ORDENTRABAJOENCAB" Relationship="Self.FK_ORDENTRA_ASIGESTAD_ESTADOOR" FromRole="ESTADOORDEN" ToRole="ORDENTRABAJOENCAB" />
+        </EntityType>
+        <EntityType Name="MARCA">
+          <Key>
+            <PropertyRef Name="IDMARCA" />
+          </Key>
+          <Property Name="IDMARCA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESMARCA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MODELO" Relationship="Self.FK_MODELO_AUTO_MARCA" FromRole="MARCA" ToRole="MODELO" />
+        </EntityType>
+        <EntityType Name="MODELO">
+          <Key>
+            <PropertyRef Name="IDMODELO" />
+          </Key>
+          <Property Name="IDMODELO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDMARCA" Type="Int32" Nullable="false" />
+          <Property Name="DESMODELO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AUTOMOVIL" Relationship="Self.FK_AUTOMOVI_CARACTERI_MODELO" FromRole="MODELO" ToRole="AUTOMOVIL" />
+          <NavigationProperty Name="MARCA" Relationship="Self.FK_MODELO_AUTO_MARCA" FromRole="MODELO" ToRole="MARCA" />
+        </EntityType>
+        <EntityType Name="ORDENTRABAJODET">
+          <Key>
+            <PropertyRef Name="IDORDENDET" />
+          </Key>
+          <Property Name="IDORDENDET" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDSERVICIO" Type="Int32" />
+          <Property Name="IDORDENCLI" Type="Int32" Nullable="false" />
+          <Property Name="IDREPUESTO" Type="Int32" />
+          <Property Name="TIEMPSERVHORAS" Type="Double" />
+          <Property Name="CANTORDENDET" Type="Int32" Nullable="false" />
+          <Property Name="PRECIOORDENDET" Type="Double" Nullable="false" />
+          <Property Name="DESCRIPCIONDET" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ORDENTRABAJOENCAB" Relationship="Self.FK_ORDENTRA_ASIGDETAL_ORDENTRA" FromRole="ORDENTRABAJODET" ToRole="ORDENTRABAJOENCAB" />
+          <NavigationProperty Name="REPUESTO" Relationship="Self.FK_ORDENTRA_ASIGREP_REPUESTO" FromRole="ORDENTRABAJODET" ToRole="REPUESTO" />
+          <NavigationProperty Name="SERVICIO" Relationship="Self.FK_ORDENTRA_ASIGSERVI_SERVICIO" FromRole="ORDENTRABAJODET" ToRole="SERVICIO" />
+        </EntityType>
+        <EntityType Name="ORDENTRABAJOENCAB">
+          <Key>
+            <PropertyRef Name="IDORDENCLI" />
+          </Key>
+          <Property Name="IDORDENCLI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDAUTO" Type="Int32" Nullable="false" />
+          <Property Name="IDESTADO" Type="Int32" Nullable="false" />
+          <Property Name="IDUSU" Type="Int32" Nullable="false" />
+          <Property Name="FECHAORDEN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COMENTARIOCLI" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="INVENTARIOVEHIC" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DANIOSAUTOCLI" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="KILOMAUTOCLI" Type="Int32" Nullable="false" />
+          <Property Name="FALLASAUTOCLI" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TRABFINALIZADO" Type="Boolean" />
+          <NavigationProperty Name="AUTOMOVIL" Relationship="Self.FK_ORDENTRA_ASIGAUTO_AUTOMOVI" FromRole="ORDENTRABAJOENCAB" ToRole="AUTOMOVIL" />
+          <NavigationProperty Name="ESTADOORDEN" Relationship="Self.FK_ORDENTRA_ASIGESTAD_ESTADOOR" FromRole="ORDENTRABAJOENCAB" ToRole="ESTADOORDEN" />
+          <NavigationProperty Name="ORDENTRABAJODET" Relationship="Self.FK_ORDENTRA_ASIGDETAL_ORDENTRA" FromRole="ORDENTRABAJOENCAB" ToRole="ORDENTRABAJODET" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_ORDENTRA_ASIGTECNI_USUARIO" FromRole="ORDENTRABAJOENCAB" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="REPUESTO">
+          <Key>
+            <PropertyRef Name="IDREPUESTO" />
+          </Key>
+          <Property Name="IDREPUESTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESREPUESTO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COSTREPUESTO" Type="Double" Nullable="false" />
+          <Property Name="STOCKREPUESTO" Type="Int32" Nullable="false" />
+          <Property Name="IDCATEGORIA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CATEGORIA" Relationship="Self.FK_REPUESTO_TIPO_REPU_CATEGORI" FromRole="REPUESTO" ToRole="CATEGORIA" />
+          <NavigationProperty Name="ORDENTRABAJODET" Relationship="Self.FK_ORDENTRA_ASIGREP_REPUESTO" FromRole="REPUESTO" ToRole="ORDENTRABAJODET" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="IDROL" />
+          </Key>
+          <Property Name="IDROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESROL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIO_TIPO_ROL" FromRole="ROL" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="SERVICIO">
+          <Key>
+            <PropertyRef Name="IDSERVICIO" />
+          </Key>
+          <Property Name="IDSERVICIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESSERVICIO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COSTSERVICIO" Type="Double" Nullable="false" />
+          <Property Name="TIPOSERVICIO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ORDENTRABAJODET" Relationship="Self.FK_ORDENTRA_ASIGSERVI_SERVICIO" FromRole="SERVICIO" ToRole="ORDENTRABAJODET" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="IDUSU" />
+          </Key>
+          <Property Name="IDUSU" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDROL" Type="Int32" Nullable="false" />
+          <Property Name="NOMBREUSU" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAILUSU" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CELUSU" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DIRECCIONUSU" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SESIONUSU" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CLAVEUSU" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AUTOMOVIL" Relationship="Self.FK_AUTOMOVI_PROPIETAR_USUARIO" FromRole="USUARIO" ToRole="AUTOMOVIL" />
+          <NavigationProperty Name="ORDENTRABAJOENCAB" Relationship="Self.FK_ORDENTRA_ASIGTECNI_USUARIO" FromRole="USUARIO" ToRole="ORDENTRABAJOENCAB" />
+          <NavigationProperty Name="ROL" Relationship="Self.FK_USUARIO_TIPO_ROL" FromRole="USUARIO" ToRole="ROL" />
+          <Property Name="CEDULUSU" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_AUTOMOVI_CARACTERI_MODELO">
+          <End Role="MODELO" Type="Self.MODELO" Multiplicity="1" />
+          <End Role="AUTOMOVIL" Type="Self.AUTOMOVIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODELO">
+              <PropertyRef Name="IDMODELO" />
+            </Principal>
+            <Dependent Role="AUTOMOVIL">
+              <PropertyRef Name="IDMODELO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AUTOMOVI_PROPIETAR_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="AUTOMOVIL" Type="Self.AUTOMOVIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSU" />
+            </Principal>
+            <Dependent Role="AUTOMOVIL">
+              <PropertyRef Name="IDUSU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDENTRA_ASIGAUTO_AUTOMOVI">
+          <End Role="AUTOMOVIL" Type="Self.AUTOMOVIL" Multiplicity="1" />
+          <End Role="ORDENTRABAJOENCAB" Type="Self.ORDENTRABAJOENCAB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTOMOVIL">
+              <PropertyRef Name="IDAUTO" />
+            </Principal>
+            <Dependent Role="ORDENTRABAJOENCAB">
+              <PropertyRef Name="IDAUTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REPUESTO_TIPO_REPU_CATEGORI">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
+          <End Role="REPUESTO" Type="Self.REPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="IDCATEGORIA" />
+            </Principal>
+            <Dependent Role="REPUESTO">
+              <PropertyRef Name="IDCATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDENTRA_ASIGESTAD_ESTADOOR">
+          <End Role="ESTADOORDEN" Type="Self.ESTADOORDEN" Multiplicity="1" />
+          <End Role="ORDENTRABAJOENCAB" Type="Self.ORDENTRABAJOENCAB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOORDEN">
+              <PropertyRef Name="IDESTADO" />
+            </Principal>
+            <Dependent Role="ORDENTRABAJOENCAB">
+              <PropertyRef Name="IDESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODELO_AUTO_MARCA">
+          <End Role="MARCA" Type="Self.MARCA" Multiplicity="1" />
+          <End Role="MODELO" Type="Self.MODELO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MARCA">
+              <PropertyRef Name="IDMARCA" />
+            </Principal>
+            <Dependent Role="MODELO">
+              <PropertyRef Name="IDMARCA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDENTRA_ASIGDETAL_ORDENTRA">
+          <End Role="ORDENTRABAJOENCAB" Type="Self.ORDENTRABAJOENCAB" Multiplicity="1" />
+          <End Role="ORDENTRABAJODET" Type="Self.ORDENTRABAJODET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDENTRABAJOENCAB">
+              <PropertyRef Name="IDORDENCLI" />
+            </Principal>
+            <Dependent Role="ORDENTRABAJODET">
+              <PropertyRef Name="IDORDENCLI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDENTRA_ASIGREP_REPUESTO">
+          <End Role="REPUESTO" Type="Self.REPUESTO" Multiplicity="0..1" />
+          <End Role="ORDENTRABAJODET" Type="Self.ORDENTRABAJODET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REPUESTO">
+              <PropertyRef Name="IDREPUESTO" />
+            </Principal>
+            <Dependent Role="ORDENTRABAJODET">
+              <PropertyRef Name="IDREPUESTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDENTRA_ASIGSERVI_SERVICIO">
+          <End Role="SERVICIO" Type="Self.SERVICIO" Multiplicity="0..1" />
+          <End Role="ORDENTRABAJODET" Type="Self.ORDENTRABAJODET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIO">
+              <PropertyRef Name="IDSERVICIO" />
+            </Principal>
+            <Dependent Role="ORDENTRABAJODET">
+              <PropertyRef Name="IDSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDENTRA_ASIGTECNI_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="ORDENTRABAJOENCAB" Type="Self.ORDENTRABAJOENCAB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSU" />
+            </Principal>
+            <Dependent Role="ORDENTRABAJOENCAB">
+              <PropertyRef Name="IDUSU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_TIPO_ROL">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="IDROL" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="IDROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TecniMecanica_vPruebaEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AUTOMOVIL" EntityType="Self.AUTOMOVIL" />
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" />
+          <EntitySet Name="ESTADOORDEN" EntityType="Self.ESTADOORDEN" />
+          <EntitySet Name="MARCA" EntityType="Self.MARCA" />
+          <EntitySet Name="MODELO" EntityType="Self.MODELO" />
+          <EntitySet Name="ORDENTRABAJODET" EntityType="Self.ORDENTRABAJODET" />
+          <EntitySet Name="ORDENTRABAJOENCAB" EntityType="Self.ORDENTRABAJOENCAB" />
+          <EntitySet Name="REPUESTO" EntityType="Self.REPUESTO" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" />
+          <EntitySet Name="SERVICIO" EntityType="Self.SERVICIO" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <AssociationSet Name="FK_AUTOMOVI_CARACTERI_MODELO" Association="Self.FK_AUTOMOVI_CARACTERI_MODELO">
+            <End Role="MODELO" EntitySet="MODELO" />
+            <End Role="AUTOMOVIL" EntitySet="AUTOMOVIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AUTOMOVI_PROPIETAR_USUARIO" Association="Self.FK_AUTOMOVI_PROPIETAR_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="AUTOMOVIL" EntitySet="AUTOMOVIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDENTRA_ASIGAUTO_AUTOMOVI" Association="Self.FK_ORDENTRA_ASIGAUTO_AUTOMOVI">
+            <End Role="AUTOMOVIL" EntitySet="AUTOMOVIL" />
+            <End Role="ORDENTRABAJOENCAB" EntitySet="ORDENTRABAJOENCAB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REPUESTO_TIPO_REPU_CATEGORI" Association="Self.FK_REPUESTO_TIPO_REPU_CATEGORI">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="REPUESTO" EntitySet="REPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDENTRA_ASIGESTAD_ESTADOOR" Association="Self.FK_ORDENTRA_ASIGESTAD_ESTADOOR">
+            <End Role="ESTADOORDEN" EntitySet="ESTADOORDEN" />
+            <End Role="ORDENTRABAJOENCAB" EntitySet="ORDENTRABAJOENCAB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODELO_AUTO_MARCA" Association="Self.FK_MODELO_AUTO_MARCA">
+            <End Role="MARCA" EntitySet="MARCA" />
+            <End Role="MODELO" EntitySet="MODELO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDENTRA_ASIGDETAL_ORDENTRA" Association="Self.FK_ORDENTRA_ASIGDETAL_ORDENTRA">
+            <End Role="ORDENTRABAJOENCAB" EntitySet="ORDENTRABAJOENCAB" />
+            <End Role="ORDENTRABAJODET" EntitySet="ORDENTRABAJODET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDENTRA_ASIGREP_REPUESTO" Association="Self.FK_ORDENTRA_ASIGREP_REPUESTO">
+            <End Role="REPUESTO" EntitySet="REPUESTO" />
+            <End Role="ORDENTRABAJODET" EntitySet="ORDENTRABAJODET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDENTRA_ASIGSERVI_SERVICIO" Association="Self.FK_ORDENTRA_ASIGSERVI_SERVICIO">
+            <End Role="SERVICIO" EntitySet="SERVICIO" />
+            <End Role="ORDENTRABAJODET" EntitySet="ORDENTRABAJODET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDENTRA_ASIGTECNI_USUARIO" Association="Self.FK_ORDENTRA_ASIGTECNI_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="ORDENTRABAJOENCAB" EntitySet="ORDENTRABAJOENCAB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_TIPO_ROL" Association="Self.FK_USUARIO_TIPO_ROL">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TecniMecanica_vPruebaModelStoreContainer" CdmEntityContainer="TecniMecanica_vPruebaEntities2">
+          <EntitySetMapping Name="AUTOMOVIL">
+            <EntityTypeMapping TypeName="TecniMecanica_vPruebaModel.AUTOMOVIL">
+              <MappingFragment StoreEntitySet="AUTOMOVIL">
+                <ScalarProperty Name="IDAUTO" ColumnName="IDAUTO" />
+                <ScalarProperty Name="IDUSU" ColumnName="IDUSU" />
+                <ScalarProperty Name="IDMODELO" ColumnName="IDMODELO" />
+                <ScalarProperty Name="COLORAUTO" ColumnName="COLORAUTO" />
+                <ScalarProperty Name="PLACAAUTO" ColumnName="PLACAAUTO" />
+                <ScalarProperty Name="KILOMAUTO" ColumnName="KILOMAUTO" />
+                <ScalarProperty Name="ANIO" ColumnName="ANIO" />
+                <ScalarProperty Name="TRANSMICION" ColumnName="TRANSMICION" />
+                <ScalarProperty Name="TIPOCOMBUSTIBLE" ColumnName="TIPOCOMBUSTIBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORIA">
+            <EntityTypeMapping TypeName="TecniMecanica_vPruebaModel.CATEGORIA">
+              <MappingFragment StoreEntitySet="CATEGORIA">
+                <ScalarProperty Name="IDCATEGORIA" ColumnName="IDCATEGORIA" />
+                <ScalarProperty Name="DESCATEGORIA" ColumnName="DESCATEGORIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADOORDEN">
+            <EntityTypeMapping TypeName="TecniMecanica_vPruebaModel.ESTADOORDEN">
+              <MappingFragment StoreEntitySet="ESTADOORDEN">
+                <ScalarProperty Name="IDESTADO" ColumnName="IDESTADO" />
+                <ScalarProperty Name="DESESTADO" ColumnName="DESESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARCA">
+            <EntityTypeMapping TypeName="TecniMecanica_vPruebaModel.MARCA">
+              <MappingFragment StoreEntitySet="MARCA">
+                <ScalarProperty Name="IDMARCA" ColumnName="IDMARCA" />
+                <ScalarProperty Name="DESMARCA" ColumnName="DESMARCA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MODELO">
+            <EntityTypeMapping TypeName="TecniMecanica_vPruebaModel.MODELO">
+              <MappingFragment StoreEntitySet="MODELO">
+                <ScalarProperty Name="IDMODELO" ColumnName="IDMODELO" />
+                <ScalarProperty Name="IDMARCA" ColumnName="IDMARCA" />
+                <ScalarProperty Name="DESMODELO" ColumnName="DESMODELO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDENTRABAJODET">
+            <EntityTypeMapping TypeName="TecniMecanica_vPruebaModel.ORDENTRABAJODET">
+              <MappingFragment StoreEntitySet="ORDENTRABAJODET">
+                <ScalarProperty Name="IDORDENDET" ColumnName="IDORDENDET" />
+                <ScalarProperty Name="IDSERVICIO" ColumnName="IDSERVICIO" />
+                <ScalarProperty Name="IDORDENCLI" ColumnName="IDORDENCLI" />
+                <ScalarProperty Name="IDREPUESTO" ColumnName="IDREPUESTO" />
+                <ScalarProperty Name="TIEMPSERVHORAS" ColumnName="TIEMPSERVHORAS" />
+                <ScalarProperty Name="CANTORDENDET" ColumnName="CANTORDENDET" />
+                <ScalarProperty Name="PRECIOORDENDET" ColumnName="PRECIOORDENDET" />
+                <ScalarProperty Name="DESCRIPCIONDET" ColumnName="DESCRIPCIONDET" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDENTRABAJOENCAB">
+            <EntityTypeMapping TypeName="TecniMecanica_vPruebaModel.ORDENTRABAJOENCAB">
+              <MappingFragment StoreEntitySet="ORDENTRABAJOENCAB">
+                <ScalarProperty Name="IDORDENCLI" ColumnName="IDORDENCLI" />
+                <ScalarProperty Name="IDAUTO" ColumnName="IDAUTO" />
+                <ScalarProperty Name="IDESTADO" ColumnName="IDESTADO" />
+                <ScalarProperty Name="IDUSU" ColumnName="IDUSU" />
+                <ScalarProperty Name="FECHAORDEN" ColumnName="FECHAORDEN" />
+                <ScalarProperty Name="COMENTARIOCLI" ColumnName="COMENTARIOCLI" />
+                <ScalarProperty Name="INVENTARIOVEHIC" ColumnName="INVENTARIOVEHIC" />
+                <ScalarProperty Name="DANIOSAUTOCLI" ColumnName="DANIOSAUTOCLI" />
+                <ScalarProperty Name="KILOMAUTOCLI" ColumnName="KILOMAUTOCLI" />
+                <ScalarProperty Name="FALLASAUTOCLI" ColumnName="FALLASAUTOCLI" />
+                <ScalarProperty Name="TRABFINALIZADO" ColumnName="TRABFINALIZADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REPUESTO">
+            <EntityTypeMapping TypeName="TecniMecanica_vPruebaModel.REPUESTO">
+              <MappingFragment StoreEntitySet="REPUESTO">
+                <ScalarProperty Name="IDREPUESTO" ColumnName="IDREPUESTO" />
+                <ScalarProperty Name="DESREPUESTO" ColumnName="DESREPUESTO" />
+                <ScalarProperty Name="COSTREPUESTO" ColumnName="COSTREPUESTO" />
+                <ScalarProperty Name="STOCKREPUESTO" ColumnName="STOCKREPUESTO" />
+                <ScalarProperty Name="IDCATEGORIA" ColumnName="IDCATEGORIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROL">
+            <EntityTypeMapping TypeName="TecniMecanica_vPruebaModel.ROL">
+              <MappingFragment StoreEntitySet="ROL">
+                <ScalarProperty Name="IDROL" ColumnName="IDROL" />
+                <ScalarProperty Name="DESROL" ColumnName="DESROL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERVICIO">
+            <EntityTypeMapping TypeName="TecniMecanica_vPruebaModel.SERVICIO">
+              <MappingFragment StoreEntitySet="SERVICIO">
+                <ScalarProperty Name="IDSERVICIO" ColumnName="IDSERVICIO" />
+                <ScalarProperty Name="DESSERVICIO" ColumnName="DESSERVICIO" />
+                <ScalarProperty Name="COSTSERVICIO" ColumnName="COSTSERVICIO" />
+                <ScalarProperty Name="TIPOSERVICIO" ColumnName="TIPOSERVICIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="TecniMecanica_vPruebaModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="CEDULUSU" ColumnName="CEDULUSU" />
+                <ScalarProperty Name="IDUSU" ColumnName="IDUSU" />
+                <ScalarProperty Name="IDROL" ColumnName="IDROL" />
+                <ScalarProperty Name="NOMBREUSU" ColumnName="NOMBREUSU" />
+                <ScalarProperty Name="EMAILUSU" ColumnName="EMAILUSU" />
+                <ScalarProperty Name="CELUSU" ColumnName="CELUSU" />
+                <ScalarProperty Name="DIRECCIONUSU" ColumnName="DIRECCIONUSU" />
+                <ScalarProperty Name="SESIONUSU" ColumnName="SESIONUSU" />
+                <ScalarProperty Name="CLAVEUSU" ColumnName="CLAVEUSU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
